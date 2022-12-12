@@ -6,17 +6,19 @@ class Client:
         self.socket = sk.socket()
         self.host_ip = ''
         self.port = ''
-        self.teste = ''
+        self.client = False
 
     
     def client_connection(self):
         print('cliente')
+        print(self.client)
         print(self.host_ip)
         print(self.port)
         with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
             s.connect((self.host_ip, self.port))
             s.sendall(b"Hello, world")
             data = s.recv(1024)
+            self.client= True
         print(f"Received {data!r}")
 
     # # fazendo a conexão
