@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from Codificacao import *
+from EncodeDecode import *
 
 
 class MessageWindow:
@@ -20,7 +20,8 @@ class MessageWindow:
         self.con = con
         self.serv = serv
 
-        self.codifica = Codificacao()
+        self.codifica = EncodeDecode()
+        self.decode = EncodeDecode()
 
         self.msg = tk.StringVar()
 
@@ -72,10 +73,10 @@ class MessageWindow:
             bit_array = self.codifica.ascii_to_binary(ascii)
             encode_8b6t = self.codifica.encode_8B6T(ascii)
             msg = f"""
--Texto:
+-Mensagem:
 {input}
 
--Cesinha:
+-Criptografado:
 {cesinha}
 
 -ASCII:
@@ -90,9 +91,36 @@ class MessageWindow:
 
         self.text_output.insert(tk.END, str(msg))
         self.codifica.get_graph(encode_8b6t)
-        
+
     def recive_msg(self):
         if self.serv.server:
-            msg = self.serv.recieve_message()
-            print(msg)
+            output = self.serv.recieve_message()
+            
+            cesinha = self.codifica.cesar(output,3,1)
+            ascii = self.codifica.string_to_ascii(cesinha)
+            encode_8b6t = self.codifica.encode_8B6T(ascii)
+
+            decode_86bt = self.decode.decode_8B6T(encode_8b6t)
+            r_bin = self.decode.ascii_to_binary(decode_86bt)
+            r_ascii = self.decode.ascii_to_string(decode_86bt)
+            r_cezinha = self.decode.cesar(r_ascii,3,0)
+            self.codifica.get_graph(encode_8b6t)
+
+            msg = f"""
+-86BT:
+{encode_8b6t}
+
+-Binario:
+{r_bin}
+
+-ASCII:
+{decode_86bt}
+
+-Criptografado:
+{cesinha}
+
+-Mensagem:
+{r_cezinha}
+"""
+                
             self.text_output.insert(tk.END, str(msg))

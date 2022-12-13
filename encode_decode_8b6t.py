@@ -16,7 +16,7 @@ class Encode_decode:
             encoded_msg.append(encoded_list[index])
         msg = ''.join(value for value in encoded_msg)
         self.encoded_message = msg
-        return msg
+        return encoded_msg
     
     def decode_8B6T(self, encoded_msg):
         df = pd.read_csv("./table.csv")
@@ -47,7 +47,7 @@ message = [116, 101, 115, 116, 101, 44, 32, 111, 112, 97, 32, 49, 50, 33]
 encoded_msg = ['000+0-', '++0-00', '000+00', '000+0-', '++0-00', '0++--0', '-++-00', '++0--+', '000++-', '+0+-00', '-++-00', '0+--+0', '0+-0-+', '+00+--']
 
 a = Encode_decode(message)
-encoded = a.encode_8B6T()
+# encoded = a.encode_8B6T()
 encoded = a.decode_8B6T(encoded_msg)
-
-a.get_graph()
+print(encoded_msg)
+print(encoded)
