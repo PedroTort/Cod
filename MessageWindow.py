@@ -90,6 +90,7 @@ class MessageWindow:
 
         self.text_output.insert(tk.END, str(msg))
         self.codifica.get_graph(encode_8b6t)
+        
     def recive_msg(self):
         if self.serv.server:
             msg = self.serv.recieve_message()
