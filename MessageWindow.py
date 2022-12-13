@@ -1,5 +1,7 @@
 import tkinter as tk
 
+from Codificacao import *
+
 
 class MessageWindow:
     def __init__(self, con, serv):
@@ -18,9 +20,12 @@ class MessageWindow:
         self.con = con
         self.serv = serv
 
+        self.codifica = Codificacao()
+
         self.msg = tk.StringVar()
 
         self.text_output.place(anchor="nw", height=400, width=780, x=10, y=60)
+        self.text_output
 
         self.text_input = tk.Entry(toplevel2, textvariable=self.msg)
         self.text_input.place(anchor="nw", height=100, width=500, x=10, y=490)
@@ -59,10 +64,27 @@ class MessageWindow:
             self.title_label.configure(text='Servidor')
 
     def send_msg(self):
-        # self.con.msg = self.msg.get()
-        # print(self.con.msg)
         if self.con.client:
             self.con.send_msg(self.text_input.get())
+            input = self.text_input.get()
+            cesinha = self.codifica.cesar(input,3,1)
+            ascii = self.codifica.string_to_ascii(cesinha)
+            bit_array = self.codifica.ascii_to_binary(ascii)
+            msg = f"""
+-Texto:
+{input}
+
+-Cesinha:
+{cesinha}
+
+-ASCII:
+{ascii}
+
+-Binario:
+{bit_array}
+"""
+
+        self.text_output.insert(tk.END, str(msg))
 
     def recive_msg(self):
         if self.serv.server:
