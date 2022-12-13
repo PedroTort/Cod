@@ -48,5 +48,5 @@ class Server():
     
     def recieve_message(self):
         with self.connection:
-            msg = self.connection.recv(1024)
+            msg = self.connection.recv(1024).decode()
             return msg

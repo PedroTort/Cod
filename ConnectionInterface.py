@@ -57,8 +57,9 @@ class ConnectionInterface:
         self.ip_button.configure(text='Get Ip')
         self.ip_button.place(anchor="nw", x=150, y=150)
 
+        
         self.test_button = tk.Button(self.toplevel1, command=self.create_new_window)
-        self.test_button.configure(text='Fecha')
+        self.test_button.configure(text='Chat')
         self.test_button.place(anchor="nw", x=250, y=150)
         
         self.title_label = tk.Label(self.toplevel1)
@@ -90,15 +91,15 @@ class ConnectionInterface:
         self.con.port = 3000   
 
     def make_client_connection(self):
-        # self.con.host_ip = self.con.get_ipv4()                
-        # self.con.port = int(self.port.get())
+        self.con.host_ip = self.con.get_ipv4()                
+        self.con.port = int(self.port.get())
         # self.con.client_connection()
         # self.con.create_connection()
         self.con.connect()
 
     def make_server_connection(self):
-        # self.serv.host_ip = self.con.get_ipv4()           
-        # self.serv.port = int(self.port.get())
+        self.serv.host_ip = self.con.get_ipv4()           
+        self.serv.port = int(self.port.get())
         # if(self.serv.port != None):
         self.serv.create_server_connection()
         # self.serv.connect()

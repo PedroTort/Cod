@@ -25,13 +25,15 @@ class MessageWindow:
         self.text_input = tk.Entry(toplevel2, textvariable=self.msg)
         self.text_input.place(anchor="nw", height=100, width=500, x=10, y=490)
 
-        self.recive_button = tk.Button(toplevel2)
-        self.recive_button.configure(text='Receber', command=self.recive_msg)
-        self.recive_button.place(anchor="nw", x=700, y=570)
+        if self.serv.server:
+            self.recive_button = tk.Button(toplevel2)
+            self.recive_button.configure(text='Receber', command=self.recive_msg)
+            self.recive_button.place(anchor="nw", x=700, y=520)
 
-        self.send_button = tk.Button(toplevel2, command=self.send_msg)
-        self.send_button.configure(text='Enviar')
-        self.send_button.place(anchor="nw", x=700, y=520)
+        elif self.con.client:
+            self.send_button = tk.Button(toplevel2, command=self.send_msg)
+            self.send_button.configure(text='Enviar')
+            self.send_button.place(anchor="nw", x=700, y=520)
 
         self.reset_button = tk.Button(toplevel2)
         self.reset_button.configure(text='button2')
