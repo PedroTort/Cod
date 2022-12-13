@@ -41,10 +41,6 @@ class MessageWindow:
             self.send_button.configure(text='Enviar')
             self.send_button.place(anchor="nw", x=700, y=520)
 
-        self.reset_button = tk.Button(toplevel2)
-        self.reset_button.configure(text='button2')
-        self.reset_button.place(anchor="nw", x=700, y=470)
-
         self.title_label = tk.Label(toplevel2)
         self.title_label.configure(text=self.title())
         self.title_label.place(anchor="n", x=380, y=10)
