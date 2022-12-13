@@ -70,6 +70,7 @@ class MessageWindow:
             cesinha = self.codifica.cesar(input,3,1)
             ascii = self.codifica.string_to_ascii(cesinha)
             bit_array = self.codifica.ascii_to_binary(ascii)
+            encode_8b6t = self.codifica.encode_8B6T(ascii)
             msg = f"""
 -Texto:
 {input}
@@ -82,10 +83,13 @@ class MessageWindow:
 
 -Binario:
 {bit_array}
+
+-8B6T:
+{encode_8b6t}
 """
 
         self.text_output.insert(tk.END, str(msg))
-
+        self.codifica.get_graph(encode_8b6t)
     def recive_msg(self):
         if self.serv.server:
             msg = self.serv.recieve_message()
