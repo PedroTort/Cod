@@ -1,4 +1,4 @@
-from ConnectionIntarface import *
+from ConnectionInterface import *
 
 if __name__ == "__main__":
     app = ConnectionInterface()

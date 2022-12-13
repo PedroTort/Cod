@@ -28,9 +28,9 @@ class ConnectionInterface:
 
         # toplevel1.maxsize(480, 640)
         # toplevel1.minsize(480, 640)
-        self.id_label = tk.Label(self.toplevel1)
-        self.id_label.configure(text='ID:')
-        self.id_label.place(anchor="nw", x=50, y=50)
+        self.ip_label = tk.Label(self.toplevel1)
+        self.ip_label.configure(text='IP:')
+        self.ip_label.place(anchor="nw", x=50, y=50)
 
         self.port_label = tk.Label(self.toplevel1)
         self.port_label.configure(text='Porta:')
@@ -39,8 +39,8 @@ class ConnectionInterface:
         self.port_entry = tk.Entry(self.toplevel1, textvariable=self.port)
         self.port_entry.place(anchor="nw", x=120, y=75)
 
-        self.id_entry = tk.Entry(self.toplevel1)
-        self.id_entry.place(anchor="nw", x=120, y=50)
+        self.ip_entry = tk.Entry(self.toplevel1)
+        self.ip_entry.place(anchor="nw", x=120, y=50)
         
 
         self.create_session_button = tk.Button(self.toplevel1, command=self.make_server_connection)
@@ -82,25 +82,34 @@ class ConnectionInterface:
 
     def get_ip_function(self):
         self.ip.set(self.con.get_ipv4())
-        self.id_entry.config(textvariable=self.ip,state="readonly")
+        self.ip_entry.config(textvariable=self.ip,state="readonly")
+
+        self.serv.host_ip = self.con.get_ipv4() 
+        self.con.host_ip = self.con.get_ipv4()    
+        self.serv.port = 3000
+        self.con.port = 3000   
 
     def make_client_connection(self):
-        self.con.host_ip = self.con.get_ipv4()                
-        self.con.port = int(self.port.get())
-        self.con.client_connection()
+        # self.con.host_ip = self.con.get_ipv4()                
+        # self.con.port = int(self.port.get())
+        # self.con.client_connection()
+        # self.con.create_connection()
+        self.con.connect()
 
     def make_server_connection(self):
-        self.serv.host_ip = self.con.get_ipv4()           
-        self.serv.port = int(self.port.get())
+        # self.serv.host_ip = self.con.get_ipv4()           
+        # self.serv.port = int(self.port.get())
         # if(self.serv.port != None):
-        self.serv.server_connection()
+        self.serv.create_server_connection()
+        # self.serv.connect()
         # else:
         #     print('not ok')
 
     def create_new_window(self):
-        if self.con.client:
+        if self.con.client or self.serv.server:
+            print(self.serv.server)
             self.toplevel1.destroy()
-            self.msgWindow = MessageWindow()
+            self.msgWindow = MessageWindow(self.con,self.serv)
             self.msgWindow.run()
 
     # def msg_window(self):
