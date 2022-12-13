@@ -5,7 +5,7 @@ from EncodeDecode import *
 
 class MessageWindow:
     def __init__(self, con, serv):
-        # build ui
+
         toplevel2 = tk.Tk()
         toplevel2.configure(background="#ffaeff", height=200, width=200)
         toplevel2.geometry("800x600")
@@ -48,7 +48,7 @@ class MessageWindow:
         self.title_label = tk.Label(toplevel2)
         self.title_label.configure(text=self.title())
         self.title_label.place(anchor="n", x=380, y=10)
-        # Main widget
+
         self.mainwindow = toplevel2
 
         
@@ -66,7 +66,7 @@ class MessageWindow:
 
     def send_msg(self):
         if self.con.client:
-            self.con.send_msg(self.text_input.get())
+
             input = self.text_input.get()
             cesinha = self.codifica.cesar(input,3,1)
             ascii = self.codifica.string_to_ascii(cesinha)
@@ -91,24 +91,21 @@ class MessageWindow:
 
         self.text_output.insert(tk.END, str(msg))
         self.codifica.get_graph(encode_8b6t)
+        self.con.send_msg(encode_8b6t)
 
     def recive_msg(self):
         if self.serv.server:
             output = self.serv.recieve_message()
-            
-            cesinha = self.codifica.cesar(output,3,1)
-            ascii = self.codifica.string_to_ascii(cesinha)
-            encode_8b6t = self.codifica.encode_8B6T(ascii)
 
-            decode_86bt = self.decode.decode_8B6T(encode_8b6t)
+            decode_86bt = self.decode.decode_8B6T(output)
             r_bin = self.decode.ascii_to_binary(decode_86bt)
             r_ascii = self.decode.ascii_to_string(decode_86bt)
             r_cezinha = self.decode.cesar(r_ascii,3,0)
-            self.codifica.get_graph(encode_8b6t)
+            self.codifica.get_graph(output)
 
             msg = f"""
 -86BT:
-{encode_8b6t}
+{output}
 
 -Binario:
 {r_bin}
@@ -117,10 +114,10 @@ class MessageWindow:
 {decode_86bt}
 
 -Criptografado:
-{cesinha}
+{r_ascii}
 
 -Mensagem:
 {r_cezinha}
 """
                 
-            self.text_output.insert(tk.END, str(msg))
+        self.text_output.insert(tk.END, str(msg))

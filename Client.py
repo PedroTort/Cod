@@ -10,27 +10,15 @@ class Client:
         self.client = False
         self.msg = ''
 
-    
-    # def client_connection(self):
-    #     print('cliente')
-    #     print(self.client)
-    #     print(self.host_ip)
-    #     print(self.port)
-    #     with sk.socket(sk.AF_INET, sk.SOCK_STREAM) as s:
-    #         s.connect((self.host_ip, self.port))
-    #         s.send(self.msg.encode())
-    #         data = s.recv(1024)
-    #         print(data)
-    #         self.client= True
-    #     # print(f"Received {data!r}")
-
     def connect(self):
+        #connect() cria o socket obj, pra fazer a conexão com o servidor
         self.socket.connect((self.host_ip,self.port))
         self.client= True
 
     def send_msg(self, msg):
         import time
         time.sleep(1)
+        #sendall() é usado pra mandar as mensagens, e o recv() lê.
         self.socket.sendall(str(msg).encode())
 
     def get_ipv4(self):
@@ -38,7 +26,6 @@ class Client:
         s = sk.socket(sk.AF_INET, sk.SOCK_DGRAM) 
         s.settimeout(0)
         try:
-            # doesn't even have to be reachable
             s.connect(('10.254.254.254', 1))
             IP = s.getsockname()[0]
         except Exception:

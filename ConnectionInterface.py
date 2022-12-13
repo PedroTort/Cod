@@ -7,7 +7,6 @@ from Server import *
 
 class ConnectionInterface:
     def __init__(self):
-        # build ui
         
         self.toplevel1 = tk.Tk()
         self.toplevel1.configure(
@@ -24,10 +23,6 @@ class ConnectionInterface:
 
         self.serv = Server()
 
-        
-
-        # toplevel1.maxsize(480, 640)
-        # toplevel1.minsize(480, 640)
         self.ip_label = tk.Label(self.toplevel1)
         self.ip_label.configure(text='IP:')
         self.ip_label.place(anchor="nw", x=50, y=50)
@@ -71,11 +66,8 @@ class ConnectionInterface:
         # Main widget
         if not self.con.client:
             self.mainwindow = self.toplevel1
-            # self.mainwindow.destroy()
         else:
             self.mainwindow = self.msgWindow.mainwindow
-
-        # Obj connection
         
     def run(self):
         self.mainwindow.mainloop()
@@ -85,26 +77,15 @@ class ConnectionInterface:
         self.ip.set(self.con.get_ipv4())
         self.ip_entry.config(textvariable=self.ip,state="readonly")
 
-        # self.serv.host_ip = self.con.get_ipv4() 
-        # self.con.host_ip = self.con.get_ipv4()    
-        # self.serv.port = 3000
-        # self.con.port = 3000   
-
     def make_client_connection(self):
         self.con.host_ip = self.ip_entry.get()
         self.con.port = int(self.port.get())
-        # self.con.client_connection()
-        # self.con.create_connection()
         self.con.connect()
 
     def make_server_connection(self):
         self.serv.host_ip = self.con.get_ipv4()           
         self.serv.port = int(self.port.get())
-        # if(self.serv.port != None):
         self.serv.create_server_connection()
-        # self.serv.connect()
-        # else:
-        #     print('not ok')
 
     def create_new_window(self):
         if self.con.client or self.serv.server:
@@ -113,8 +94,6 @@ class ConnectionInterface:
             self.msgWindow = MessageWindow(self.con,self.serv)
             self.msgWindow.run()
 
-    # def msg_window(self):
-    #     self.msgWindow.run()
 
 
 

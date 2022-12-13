@@ -28,13 +28,11 @@ class EncodeDecode:
 
 
     def ascii_to_binary(self,ascii):
-        # print(ascii)
         bin_values = []
         ascii_array = ascii.split(" ")
         for value in ascii_array:
             binzao = format(int(value), '08b')
             bin_values.append(binzao)
-            # print(binzao)
         msg = ''.join(value for value in bin_values)
         print(msg)
         return msg
@@ -66,15 +64,11 @@ class EncodeDecode:
         spaced_array = [encoded[i:i+6] for i in range(0, len(encoded),6)]
         decoded_msg = []
 
-        msg = ''
         for value in spaced_array:
             ascii_value = df[df['encoded'] == value].index[0]
             decoded_msg.append(ascii_value)
-        # msg = ''.join(chr(i) for i in decoded_msg)
-        # print(msg)
         string = str(decoded_msg)
         string = string.replace(',', '').replace('[', '').replace(']', '')
-        # return decoded_msg
         return string
 
 
@@ -90,28 +84,3 @@ class EncodeDecode:
         from matplotlib import pyplot as plt
         plt.plot(values)
         plt.show()
-
-a = EncodeDecode()
-
-string = 'Opa, aqui ta uma string'
-# print(string)
-cesinha = a.cesar(string,3,1)
-# print(cesinha)
-ascii = a.string_to_ascii(cesinha)
-# print(ascii)
-bin = a.ascii_to_binary(ascii)
-# print(bin)
-teste = a.encode_8B6T(ascii)
-print(teste)
-print()
-print()
-print()
-print()
-# spaced_array = [teste[i:i+6] for i in range(0, len(teste),6)]
-# print(spaced_array)
-decode = a.decode_8B6T(teste)
-# print(decode)
-bi = a.ascii_to_binary(decode)
-asci = a.ascii_to_string(decode)
-cezin_2 = a.cesar(asci,3,0)
-print(cezin_2)
