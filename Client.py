@@ -26,33 +26,12 @@ class Client:
 
     def connect(self):
         self.socket.connect((self.host_ip,self.port))
-        # self.socket.sendall(b"data")
         self.client= True
 
     def send_msg(self, msg):
-        # self.socket.send(self.msg.encode())
         import time
         time.sleep(1)
         self.socket.sendall(str(msg).encode())
-
-
-
-
-    # # fazendo a conexão
-    # def connect(self):
-    #     #connect() cria o socket obj, pra fazer a conexão com o servidor
-    #     #sendall() é usado pra mandar as mensagens, e o recv() lê.
-    #     self.socket.connect(self.host_ip,self.port)
-
-    # # criando a conexão
-    # def create_connection(self):
-    #     #bind() associando o socket com a rede e a porta
-    #     self.socket.bind(self.host_ip,self.port) 
-    #     #listen() permite que o servidor receba conexões
-
-    #     #accept() bloqueia execuções e espera por uma conexão vindo
-    #     self.teste, self.host_ip = self.socket.accept() 
-
 
     def get_ipv4(self):
         #AF_INET eh o ipv4, SOCK_DGRAM eh o tipo do socket

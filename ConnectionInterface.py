@@ -85,13 +85,13 @@ class ConnectionInterface:
         self.ip.set(self.con.get_ipv4())
         self.ip_entry.config(textvariable=self.ip,state="readonly")
 
-        self.serv.host_ip = self.con.get_ipv4() 
-        self.con.host_ip = self.con.get_ipv4()    
-        self.serv.port = 3000
-        self.con.port = 3000   
+        # self.serv.host_ip = self.con.get_ipv4() 
+        # self.con.host_ip = self.con.get_ipv4()    
+        # self.serv.port = 3000
+        # self.con.port = 3000   
 
     def make_client_connection(self):
-        self.con.host_ip = self.con.get_ipv4()                
+        self.con.host_ip = self.ip_entry.get()
         self.con.port = int(self.port.get())
         # self.con.client_connection()
         # self.con.create_connection()
