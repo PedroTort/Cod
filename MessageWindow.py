@@ -97,7 +97,6 @@ class MessageWindow:
             r_bin = self.decode.ascii_to_binary(decode_86bt)
             r_ascii = self.decode.ascii_to_string(decode_86bt)
             r_cezinha = self.decode.cesar(r_ascii,3,0)
-            self.codifica.get_graph(output)
 
             msg = f"""
 -86BT:
@@ -117,3 +116,4 @@ class MessageWindow:
 """
                 
         self.text_output.insert(tk.END, str(msg))
+        self.codifica.get_graph(output)
